@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>德拓翻译</title>
+    <link rel="stylesheet" href="./static/css/translation.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="max-width">
+        <div class="inner">
+            <a href="http://www.datatom.com/" target="_blank    ">
+                <img class="logo lp-cursor" src="./static/img/logo.svg" title="datatom">
+            </a>
+        </div>
+    </header>
+    <div class="content max-width">
+        <div class="inner">
+            <div class="title lp-cursor" id="title"><span tabindex="0">翻译</span></div>
+            <div class="hr max-width min-width"></div>
+            <div class="main">
+                <form action="#" method="get">
+                    <div class="langs max-width lp-flex min-width" id="langs">
+                        <!-- Original language -->
+                        <div class="lang-left lp-flex lp-flex-left" id="lang-left" tabindex="0">
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-checked lp-radius-collapse-left lp-clear-right-border lang-btn-group-right-border" tabindex="0">葡萄牙语</div>
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">中文</div>
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">德语</div>
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lang-btn-group-right-border lp-clear-right-border" tabindex="0">检测语言</div>
+                            <div class="original lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse-right standard-select-btn-nofocus" tabindex="0">
+                                <div class="arrow-dropdown"></div>
+                            </div>
+                            <div class="lang-switch lp-flex-inline lp-flex-right" tabindex="0">
+                                <div class="switch lang-select-btn lang-btn lp-flex  standard-btn lp-radius-collapse standard-select-btn-nofocus" tabindex="0">
+                                    <!--<img src="./static/img/switch_camera.svg" alt="<=>" title="转换">-->
+                                    <span class="fa fa-exchange lp-24px lp-color-theme"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Destination language -->
+                        <div class="lang-right lp-flex lp-flex-left" id="lang-right">
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-checked lp-radius-collapse-left lp-clear-right-border lang-btn-group-right-border" tabindex="0">中文</div>
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">葡萄牙语</div>
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">葡萄牙语</div>
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lang-btn-group-right-border lp-clear-right-border" tabindex="0">德语</div>
+                            <div class="destination lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse-right standard-select-btn-nofocus" tabindex="0">
+                                <div class="arrow-dropdown"></div>
+                            </div>
+                            <div class="lang-translation lp-flex-inline ">
+                                <div class="lang-select-btn lang-btn lp-flex lp-flex-center lp-radius-collapse standard-select-btn-nofocus" tabindex="0">
+                                    翻译
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lang-io lp-flex min-width">
+                        <div class="lang-left lp-flex">
+                            <label for="translation_input">被翻译前的文字</label><textarea name="original" id="translation_input" spellcheck="false">datatom</textarea>
+                        </div>
+                        <div class="lang-right lp-flex">
+                            <label for="translation_output">被翻译后的文字</label><textarea name="destination" id="translation_output" spellcheck="false">datatom</textarea>
+                        </div>
+                    </div>
+                    <div class="history-wrap lp-flex">
+                        history-wrap```
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- TODO. -->
+    <div style="margin: 800px 0 0 0;"></div>
+    <footer class="max-width">
+        <div class="inner">
+            2018- © <a href="http://www.datatom.com/" title="datatom" target="_blank">Datatom</a> Corp.
+        </div>
+    </footer>
+    <script src="./static/js/libs/jquery/jquery.min.js"></script>
+    <script src="./static/js/polyfill/MDN.js"></script>
+    <script>
+        // Only one variable
+        let lpModule = {};
+        // Enum
+        const Enum = {
+            // Save some different selector name, but it is, too.
+            // Class name
+            LANG_BTN_CHECKED : "standard-btn-checked",
+            LANG_BTN_NOFOCUS : "standard-btn-nofocus",
+            LANG_SELECT_BTN_NOFOCUS : "standard-select-btn-nofocus",
+            LANG_SELECT_BTN_CHECKED : "standard-select-btn-checked",
+            // Selector name
+            LANG_BTN_RIGHT_SELECTOR : "div.lang-right div",
+            LANG_BTN_LEFT_SELECTOR : "div.lang-left div",
+            LANG_OF_ORIGINAL_SELECT_SELECTOR : ".original.lang-select-btn",
+            LANG_OF_DESTINATION_SELECT_SELECTOR : ".destination.lang-select-btn",
+            LANG_OF_INPUT_DIV_SELECTOR : ".lang-left.lp-flex",
+            // Event name
+            CLICK : "click",
+            FOCUS : "focus",
+            BLUR : "blur"
+        };
+        // Dom object tree cache
+        lpModule.$window = {
+            $document : $(document),
+            $langs : $("#langs"),
+            $langLeft : $("#lang-left")
+        };
+        // Record
+        const record = {
+            langBtnLeftChooice : ".lang-left :first",
+            langBtnRightChooice : ".lang-right :first",
+        };
+        for(let i = 0,
+                selectors = (function(){
+                    let _map = {};
+                    _map[Enum.LANG_BTN_LEFT_SELECTOR] = Enum.CLICK;
+                    _map[Enum.LANG_BTN_RIGHT_SELECTOR] = Enum.CLICK;
+                    _map[Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR] = Enum.CLICK;
+                    _map[Enum.LANG_OF_DESTINATION_SELECT_SELECTOR] = Enum.CLICK;
+                    _map[Enum.LANG_OF_INPUT_DIV_SELECTOR] = Enum.FOCUS;
+                    return _map;
+                })(),
+                toggleBtnFn = function(e, a, b){
+                    if(e.hasClass(a)) {
+                        e.addClass(b)
+                            .removeClass(a);
+                    }
+                    else {
+                        e.removeClass(b)
+                            .addClass(a);
+                    }
+                },
+                length = Object.keys(selectors).length; i < length; i++)
+        {
+            (function(p){
+                lpModule.$window.$document.on(Object.values(selectors)[p], Object.keys(selectors)[p], function(e){
+                    // Cache
+                    var $this = $(this);
+                    switch (Object.keys(selectors)[p]) {
+                        case Enum.LANG_BTN_RIGHT_SELECTOR:
+                            if($this.hasClass(Enum.LANG_BTN_NOFOCUS)) {
+                                $this.addClass(Enum.LANG_BTN_CHECKED)
+                                    .removeClass(Enum.LANG_BTN_NOFOCUS);
+
+                                $(record.langBtnRightChooice)
+                                    .removeClass(Enum.LANG_BTN_CHECKED)
+                                    .addClass(Enum.LANG_BTN_NOFOCUS);
+
+                                record.langBtnRightChooice = $this;
+                            }
+                            break;
+                        case Enum.LANG_BTN_LEFT_SELECTOR:
+                            if($this.hasClass(Enum.LANG_BTN_NOFOCUS)) {
+                                $this.addClass(Enum.LANG_BTN_CHECKED)
+                                    .removeClass(Enum.LANG_BTN_NOFOCUS);
+
+                                $(record.langBtnLeftChooice)
+                                    .removeClass(Enum.LANG_BTN_CHECKED)
+                                    .addClass(Enum.LANG_BTN_NOFOCUS);
+
+                                record.langBtnLeftChooice = $this;
+                            }
+                            break;
+                        case Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR:
+                            // Toggle
+                            toggleBtnFn($this, Enum.LANG_SELECT_BTN_NOFOCUS, Enum.LANG_SELECT_BTN_CHECKED);
+                            console.info($this);
+                            break;
+                        case Enum.LANG_OF_DESTINATION_SELECT_SELECTOR:
+                            // Toggle
+                            toggleBtnFn($this, Enum.LANG_SELECT_BTN_NOFOCUS, Enum.LANG_SELECT_BTN_CHECKED);
+                            console.info($this);
+                            break;
+                        case Enum.LANG_OF_INPUT_TEXTAREA_SELECTOR:
+                            // Toggle outline
+                            $this.addClass(selectors[Enum.LANG_OF_INPUT_TEXTAREA_SELECTOR]);
+                            console.info($this);
+                            break;
+                        case Enum.LANG_OF_INPUT_TEXTAREA_SELECTOR:
+                            // Toggle outline
+                            $this.addClass(selectors[Enum.LANG_OF_INPUT_TEXTAREA_SELECTOR]);
+                            console.info($this);
+                            break;
+                    }
+                })
+            })(i);
+        }
+
+        // Textarea plugin
+        jQuery.fn.extend({
+            autoHeight: function(){
+                return this.each(function(){
+                    var $this = jQuery(this);
+                    if( !$this.attr('_initAdjustHeight') ){
+                        $this.attr('_initAdjustHeight', $this.outerHeight());
+                    }
+                    _adjustH(this).on('input', function(){
+                        _adjustH(this);
+                    });
+                });
+                /**
+                 * 重置高度
+                 * @param {Object} elem
+                 */
+                function _adjustH(elem){
+                    var $obj = jQuery(elem);
+                    return $obj.css({height: $obj.attr('_initAdjustHeight'), 'overflow-y': 'hidden'})
+                        .height( elem.scrollHeight );
+                }
+            }
+        });
+        // Do textarea of font length
+        lpModule.$window.$document.on("keydown", ".lang-left>textarea", function(e){
+        });
+        $(function(){
+            // Make textarea auto height
+            $("#translation_input").autoHeight();
+            $("#translation_output").autoHeight();
+        })
+    </script>
+</body>
+</html>
