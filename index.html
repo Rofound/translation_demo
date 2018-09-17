@@ -22,7 +22,7 @@
                 <form action="#" method="get">
                     <div class="langs max-width lp-flex min-width" id="langs">
                         <!-- Original language -->
-                        <div class="lang-left lp-flex lp-flex-left" id="lang-left" tabindex="0">
+                        <div class="half-division lang-left lp-flex lp-flex-left" id="lang-left" tabindex="0">
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-checked lp-radius-collapse-left lp-clear-right-border lang-btn-group-right-border" tabindex="0">葡萄牙语</div>
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">中文</div>
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">德语</div>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <!-- Destination language -->
-                        <div class="lang-right lp-flex lp-flex-left" id="lang-right">
+                        <div class="half-division lang-right lp-flex lp-flex-left" id="lang-right">
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-checked lp-radius-collapse-left lp-clear-right-border lang-btn-group-right-border" tabindex="0">中文</div>
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">葡萄牙语</div>
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">葡萄牙语</div>
@@ -54,17 +54,68 @@
                         </div>
                     </div>
                     <div id="langIO" class="lang-io lp-flex min-width">
-                        <div class="lang-left lp-flex">
-                            <label for="translation_input">被翻译前的文字</label><textarea name="original" id="translation_input" spellcheck="false">datatom</textarea>
-                            <div id="translationInputClear" class="lang-clear standard-btn "><i class="fa fa-times" aria-hidden="true"></i></div>
+                        <div id="srcDivision" class="half-division lang-left lp-flex readable">
+                            <label for="translationInput">被翻译前的文字</label>
+                            <textarea name="original" id="translationInput" spellcheck="false">day</textarea>
+                            <div id="translationInputClear" class="lang-clear lp-cursor">
+                                <i class="fa fa-times"></i>
+                            </div>
                         </div>
-                        <div class="lang-right lp-flex">
-                            <label for="translation_output">被翻译后的文字</label><textarea name="destination" id="translation_output" spellcheck="false" readonly="readonly">德拓</textarea>
+                        <div id="destDivision" class="half-division lang-right lp-flex readable">
+                            <label for="translationOutput">被翻译后的文字</label>
+                            <textarea name="destination" id="translationOutput" spellcheck="false" readonly="readonly">天</textarea>
+                            <div id="translationOutputCopyToClipboard" class="lang-clear lp-cursor">
+                                <i class="fa fa-clipboard"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="history-wrap lp-flex">
+                    <div id="translitDivision" class="lp-flex min-width">
+                        <div id="srcTranslit"  class="half-division src-translit-wrap lp-flex lp-flex-left">
+                            translit```
+                        </div>
+                        <div id="destTranslit"  class="half-division dest-translit-wrap lp-flex lp-flex-left lang-right">
+                            translit```
+                        </div>
+                    </div>
+                    <div class="lp-flex min-width">
+                        <div id="srcDefine"  class="lang-t half-division defindeDivision">
+                            <h4><span>day</span>的定义</h4>
+                            <h5>名词</h5>
+                            <div class="srcDefineDivision">
+                                <p>a period of twenty-four hours as a unit of time, reckoned from one midnight to the next, corresponding to a rotation of the earth on its axis.</p>
+                                <q>There ought to be twenty-nine days in every month, not just leap year Februaries.</q>
+                                <em class="Synonyms">同义词: <span>a twenty-four-hour period, twenty-four hours</span></em>
+                            </div>
+                            <div class="srcDefineDivision">
+                                <p>a period of twenty-four hours as a unit of time, reckoned from one midnight to the next, corresponding to a rotation of the earth on its axis.</p>
+                                <q>There ought to be twenty-nine days in every month, not just leap year Februaries.</q>
+                                <em class="Synonyms">同义词: <span>a twenty-four-hour period, twenty-four hours</span></em>
+                            </div>
+                        </div>
+                        <div id="srcTranslation"  class="half-division lang-right">
+                            <h4><span>day</span>的翻译</h4>
+                        </div>
+                    </div>
+                    <div class="lp-flex min-width">
+                        <div id="srcSynonyms"  class="lang-t half-division defindeDivision">
+                            <h4>同义词</h4>
+                            <h5>名词</h5>
+                            <div class="srcDefineDivision">
+                                <p>a period of twenty-four hours as a unit of time, reckoned from one midnight to the next, corresponding to a rotation of the earth on its axis.</p>
+                                <q>There ought to be twenty-nine days in every month, not just leap year Februaries.</q>
+                                <em class="Synonyms">同义词: <span>a twenty-four-hour period, twenty-four hours</span></em>
+                            </div>
+                            <div class="srcDefineDivision">
+                                <p>a period of twenty-four hours as a unit of time, reckoned from one midnight to the next, corresponding to a rotation of the earth on its axis.</p>
+                                <q>There ought to be twenty-nine days in every month, not just leap year Februaries.</q>
+                                <em class="Synonyms">同义词: <span>a twenty-four-hour period, twenty-four hours</span></em>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="history-wrap lp-flex">
                         history-wrap```
-                    </div>
+                    </div>-->
                 </form>
             </div>
         </div>
@@ -77,6 +128,7 @@
         </div>
     </footer>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
     <script src="./static/js/polyfill/MDN.js"></script>
     <script>
         // Only one variable
@@ -87,6 +139,7 @@
             // Class name
             LANG_BTN_CHECKED : "standard-btn-checked",
             LANG_BTN_NOFOCUS : "standard-btn-nofocus",
+            LANG_BTN : "standard-btn",
             LANG_SELECT_BTN_NOFOCUS : "standard-select-btn-nofocus",
             LANG_SELECT_BTN_CHECKED : "standard-select-btn-checked",
             // Selector name
@@ -96,25 +149,48 @@
             LANG_OF_DESTINATION_SELECT_SELECTOR : ".destination.lang-select-btn",
             LANG_OF_SOURCE_DIV_SELECTOR : "#langIO>.lang-left.lp-flex",
             LANG_INPUT_CLEAR : "#translationInputClear",
+            LANG_INPUT_TEXTAREA : "#translationInput",
+            LANG_OUTPUT_TEXTAREA : "#translationOutput",
+            LANG_OUTPUT_COPY_TO_CLIPBOARD : "#translationOutputCopyToClipboard",
             // Event name
             CLICK : "click",
             FOCUS : "focus",
             BLUR : "blur",
             MOUSEOVER : "mouseover",
             MOUSEOUT : "mouseout",
+            SCCUESS : "success",
+            ERROR : "error",
         };
         // Dom object tree cache
         lpModule.$window = {
             $document : $(document),
+            $body : $(document.body),
             $langs : $("#langs"),
             $langLeft : $("#lang-left"),
             $langIOLeft : $(Enum.LANG_OF_SOURCE_DIV_SELECTOR),
+            $langInput: $(Enum.LANG_INPUT_TEXTAREA),
+            $langOutput: $(Enum.LANG_OUTPUT_TEXTAREA),
         };
         // Record
         const record = {
             langBtnLeftChooice : ".lang-left :first",
             langBtnRightChooice : ".lang-right :first",
         };
+        // Copy to the clipboard
+        lpModule.Clipboard = function(selectorName, originalContent){
+            let _clipboard = new Clipboard(selectorName, {
+                text: function(){
+                    return originalContent;
+                }
+            });
+            _clipboard.on(Enum.SCCUESS, function(e){
+                console.log("Copy to clipboard: ", Enum.SCCUESS, "\n ", e);
+            });
+            _clipboard.on(Enum.ERROR, function(e){
+                console.log("Copy to clipboard: ", Enum.ERROR, "\n ", e);
+            });
+        };
+        lpModule.Clipboard(Enum.LANG_OUTPUT_COPY_TO_CLIPBOARD, lpModule.$window.$langOutput.val());
         for(let i = 0,
                 eventMaps = [
                     { selectorName: Enum.LANG_BTN_LEFT_SELECTOR, eventName: Enum.CLICK},
@@ -122,9 +198,14 @@
                     { selectorName: Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR, eventName: Enum.CLICK},
                     { selectorName: Enum.LANG_OF_DESTINATION_SELECT_SELECTOR, eventName: Enum.CLICK},
                     { selectorName: Enum.LANG_INPUT_CLEAR, eventName: Enum.CLICK},
+
+                    { selectorName: Enum.LANG_OUTPUT_COPY_TO_CLIPBOARD, eventName: Enum.CLICK},
+
+                    { selectorName: Enum.LANG_INPUT_TEXTAREA, eventName: Enum.CLICK},
+                    { selectorName: Enum.LANG_INPUT_TEXTAREA, eventName: Enum.MOUSEOVER},
                     // source division event start
-                    { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.FOCUS},
                     { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.BLUR},
+                    { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.FOCUS},
                     // source division event end
 
                 ],
@@ -141,7 +222,7 @@
                 length = eventMaps.length; i < length; i++)
         {
             (function(p){
-                lpModule.$window.$document.on(eventMaps[p].eventName, eventMaps[p].selectorName, function(e){
+                lpModule.$window.$body.on(eventMaps[p].eventName, eventMaps[p].selectorName, function(e){
                     // Cache
                     var $this = $(this);
                     switch (eventMaps[p].selectorName) {
@@ -163,8 +244,7 @@
                                 $this.addClass(Enum.LANG_BTN_CHECKED)
                                     .removeClass(Enum.LANG_BTN_NOFOCUS);
 
-                                $(record.langBtnLeftChooice)
-                                    .removeClass(Enum.LANG_BTN_CHECKED)
+                                $(record.langBtnLeftChooice).removeClass(Enum.LANG_BTN_CHECKED)
                                     .addClass(Enum.LANG_BTN_NOFOCUS);
 
                                 record.langBtnLeftChooice = $this;
@@ -184,21 +264,27 @@
                             // Toggle outline
                             eventMaps[p].eventName === Enum.FOCUS?
                                 $this.addClass(Enum.FOCUS):
-                                $this.removeClass(Enum.FOCUS);
+                                0;
+                            eventMaps[p].eventName === Enum.BLUR?
+                                $this.removeClass(Enum.FOCUS):
+                                0;
                             console.info($this);
                             break;
                         case Enum.LANG_INPUT_CLEAR:
-                            lpModule.$window.$langIOLeft.addClass(Enum.FOCUS);
-                            // Add left lang input division of focus style when its click
                             if(eventMaps[p].eventName === Enum.CLICK){
+                                // Clear original input text area content
+                                lpModule.$window.$langInput.val("");
                                 lpModule.$window.$langIOLeft.addClass(Enum.FOCUS);
+                            }
+                            else if(eventMaps[p].eventName === Enum.MOUSEOVER){
+                                $this.addClass(Enum.LANG_BTN)
                             }
                             break;
                     }
                 })
             })(i);
         }
-        // Textarea plugin
+        // The text area plugin
         jQuery.fn.extend({
             autoHeight: function(){
                 return this.each(function(){
@@ -226,8 +312,8 @@
         });
         $(function(){
             // Make textarea auto height
-            $("#translation_input").autoHeight();
-            $("#translation_output").autoHeight();
+            $("#translationInput").autoHeight();
+            $("#translationOutput").autoHeight();
         })
     </script>
 </body>
