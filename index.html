@@ -30,7 +30,7 @@
                             <div class="original lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse-right standard-select-btn-nofocus" tabindex="0">
                                 <div class="arrow-dropdown"></div>
                             </div>
-                            <div class="lang-switch lp-flex-inline lp-flex-right" tabindex="0">
+                            <div class="lang-switch lp-flex-inline lp-flex-right outline-none" tabindex="0">
                                 <div class="switch lang-select-btn lang-btn lp-flex  standard-btn lp-radius-collapse standard-select-btn-nofocus" tabindex="0">
                                     <!--<img src="./static/img/switch_camera.svg" alt="<=>" title="转换">-->
                                     <span class="fa fa-exchange lp-24px lp-color-theme"></span>
@@ -53,12 +53,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="lang-io lp-flex min-width">
+                    <div id="langIO" class="lang-io lp-flex min-width">
                         <div class="lang-left lp-flex">
                             <label for="translation_input">被翻译前的文字</label><textarea name="original" id="translation_input" spellcheck="false">datatom</textarea>
+                            <div id="translationInputClear" class="lang-clear standard-btn "><i class="fa fa-times" aria-hidden="true"></i></div>
                         </div>
                         <div class="lang-right lp-flex">
-                            <label for="translation_output">被翻译后的文字</label><textarea name="destination" id="translation_output" spellcheck="false">datatom</textarea>
+                            <label for="translation_output">被翻译后的文字</label><textarea name="destination" id="translation_output" spellcheck="false" readonly="readonly">德拓</textarea>
                         </div>
                     </div>
                     <div class="history-wrap lp-flex">
@@ -75,7 +76,7 @@
             2018- © <a href="http://www.datatom.com/" title="datatom" target="_blank">Datatom</a> Corp.
         </div>
     </footer>
-    <script src="./static/js/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="./static/js/polyfill/MDN.js"></script>
     <script>
         // Only one variable
@@ -93,17 +94,21 @@
             LANG_BTN_LEFT_SELECTOR : "div.lang-left div",
             LANG_OF_ORIGINAL_SELECT_SELECTOR : ".original.lang-select-btn",
             LANG_OF_DESTINATION_SELECT_SELECTOR : ".destination.lang-select-btn",
-            LANG_OF_INPUT_DIV_SELECTOR : ".lang-left.lp-flex",
+            LANG_OF_SOURCE_DIV_SELECTOR : "#langIO>.lang-left.lp-flex",
+            LANG_INPUT_CLEAR : "#translationInputClear",
             // Event name
             CLICK : "click",
             FOCUS : "focus",
-            BLUR : "blur"
+            BLUR : "blur",
+            MOUSEOVER : "mouseover",
+            MOUSEOUT : "mouseout",
         };
         // Dom object tree cache
         lpModule.$window = {
             $document : $(document),
             $langs : $("#langs"),
-            $langLeft : $("#lang-left")
+            $langLeft : $("#lang-left"),
+            $langIOLeft : $(Enum.LANG_OF_SOURCE_DIV_SELECTOR),
         };
         // Record
         const record = {
@@ -111,15 +116,18 @@
             langBtnRightChooice : ".lang-right :first",
         };
         for(let i = 0,
-                selectors = (function(){
-                    let _map = {};
-                    _map[Enum.LANG_BTN_LEFT_SELECTOR] = Enum.CLICK;
-                    _map[Enum.LANG_BTN_RIGHT_SELECTOR] = Enum.CLICK;
-                    _map[Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR] = Enum.CLICK;
-                    _map[Enum.LANG_OF_DESTINATION_SELECT_SELECTOR] = Enum.CLICK;
-                    _map[Enum.LANG_OF_INPUT_DIV_SELECTOR] = Enum.FOCUS;
-                    return _map;
-                })(),
+                eventMaps = [
+                    { selectorName: Enum.LANG_BTN_LEFT_SELECTOR, eventName: Enum.CLICK},
+                    { selectorName: Enum.LANG_BTN_RIGHT_SELECTOR, eventName: Enum.CLICK},
+                    { selectorName: Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR, eventName: Enum.CLICK},
+                    { selectorName: Enum.LANG_OF_DESTINATION_SELECT_SELECTOR, eventName: Enum.CLICK},
+                    { selectorName: Enum.LANG_INPUT_CLEAR, eventName: Enum.CLICK},
+                    // source division event start
+                    { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.FOCUS},
+                    { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.BLUR},
+                    // source division event end
+
+                ],
                 toggleBtnFn = function(e, a, b){
                     if(e.hasClass(a)) {
                         e.addClass(b)
@@ -130,13 +138,14 @@
                             .addClass(a);
                     }
                 },
-                length = Object.keys(selectors).length; i < length; i++)
+                length = eventMaps.length; i < length; i++)
         {
             (function(p){
-                lpModule.$window.$document.on(Object.values(selectors)[p], Object.keys(selectors)[p], function(e){
+                lpModule.$window.$document.on(eventMaps[p].eventName, eventMaps[p].selectorName, function(e){
                     // Cache
                     var $this = $(this);
-                    switch (Object.keys(selectors)[p]) {
+                    switch (eventMaps[p].selectorName) {
+                    // switch (Object.keys(selectors)[p]) {
                         case Enum.LANG_BTN_RIGHT_SELECTOR:
                             if($this.hasClass(Enum.LANG_BTN_NOFOCUS)) {
                                 $this.addClass(Enum.LANG_BTN_CHECKED)
@@ -171,21 +180,24 @@
                             toggleBtnFn($this, Enum.LANG_SELECT_BTN_NOFOCUS, Enum.LANG_SELECT_BTN_CHECKED);
                             console.info($this);
                             break;
-                        case Enum.LANG_OF_INPUT_TEXTAREA_SELECTOR:
+                        case Enum.LANG_OF_SOURCE_DIV_SELECTOR:
                             // Toggle outline
-                            $this.addClass(selectors[Enum.LANG_OF_INPUT_TEXTAREA_SELECTOR]);
+                            eventMaps[p].eventName === Enum.FOCUS?
+                                $this.addClass(Enum.FOCUS):
+                                $this.removeClass(Enum.FOCUS);
                             console.info($this);
                             break;
-                        case Enum.LANG_OF_INPUT_TEXTAREA_SELECTOR:
-                            // Toggle outline
-                            $this.addClass(selectors[Enum.LANG_OF_INPUT_TEXTAREA_SELECTOR]);
-                            console.info($this);
+                        case Enum.LANG_INPUT_CLEAR:
+                            lpModule.$window.$langIOLeft.addClass(Enum.FOCUS);
+                            // Add left lang input division of focus style when its click
+                            if(eventMaps[p].eventName === Enum.CLICK){
+                                lpModule.$window.$langIOLeft.addClass(Enum.FOCUS);
+                            }
                             break;
                     }
                 })
             })(i);
         }
-
         // Textarea plugin
         jQuery.fn.extend({
             autoHeight: function(){
