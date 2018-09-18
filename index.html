@@ -22,7 +22,7 @@
                 <form action="#" method="get">
                     <div class="langs max-width lp-flex min-width" id="langs">
                         <!-- Original language -->
-                        <div class="half-division lang-left lp-flex lp-flex-left" id="lang-left" tabindex="0">
+                        <div class="half-division lang-left lp-flex lp-flex-right " id="lang-left" tabindex="0">
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-checked lp-radius-collapse-left lp-clear-right-border lang-btn-group-right-border" tabindex="0" style="-moz-user-select: none;">葡萄牙语</div>
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">中文</div>
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">德语</div>
@@ -30,7 +30,7 @@
                             <div class="original lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse-right standard-select-btn-nofocus" tabindex="0">
                                 <div class="arrow-dropdown"></div>
                             </div>
-                            <div class="lang-switch lp-flex-inline lp-flex-right outline-none" tabindex="0">
+                            <div style="" class="lang-switch lp-flex-inline lp-flex-right outline-none" tabindex="0">
                                 <div class="switch lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse standard-select-btn-nofocus" tabindex="0">
                                     <!--<img src="./static/img/switch_camera.svg" alt="<=>" title="转换">-->
                                     <span class="fa fa-exchange lp-24px lp-color-theme"></span>
@@ -144,7 +144,8 @@
                             </div>
                         </div>
                     </div>
-                    <div id="langsControlPanel">hah</div>
+                    <div id="srcLangsControlPanel">srcLangsControlPanel</div>
+                    <div id="destLangsControlPanel">destLangsControlPanel</div>
                     <!--
                     TODO.
                     <div class="history-wrap lp-flex">
@@ -198,6 +199,7 @@
         };
         // Dom object tree cache
         lpModule.$window = {
+            $ : $(window),
             $document : $(document),
             $body : $(document.body),
             $langs : $("#langs"),

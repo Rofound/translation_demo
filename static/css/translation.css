@@ -274,12 +274,12 @@ em.Synonyms{
     min-width: 30px;
     color: #000;
 }
-#langsControlPanel {
+#srcLangsControlPanel, #destLangsControlPanel {
     position: absolute;
     z-index: 9999;
     height: 300px;
-    width: 900px;
-    background: khaki;
+    width: 600px;
+    background: #a94442;
 }
 /* common */
 h4 {
