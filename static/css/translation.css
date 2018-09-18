@@ -97,6 +97,8 @@ header > .inner .logo {
     color: #333;
     cursor: pointer;
     user-select: none;
+    -moz-user-select: none;
+    -moz-outline: none;
 }
 .standard-btn-checked,
 .standard-select-btn-checked {
@@ -180,7 +182,7 @@ header > .inner .logo {
     box-shadow: inset 2px 3px 12px 0 rgba(137, 168, 186, 0.3);
 }
 .lang-left.editable:hover, .lang-right.editable:hover{
-    outline: rgba(18, 63, 88, 1) auto 5px !important;
+    outline: rgba(18, 63, 88, 1) auto 2px;
 }
 #destDivision.lang-right {
     background: rgb(245, 245, 245);
@@ -251,6 +253,34 @@ em.Synonyms{
 .srcDefineDivision {
     margin-bottom: 10px;
 }
+.face-lists {
+    padding: 4px 6px;
+    margin: 0;
+    font-weight: normal;
+    font-size: 13px;
+}
+.face-lists>.item>div{
+    border-right: 20px transparent solid ;
+}
+.face-lists>.item>.colorbar{
+    min-width: 30px;
+    text-align: right;
+    height: 9px;
+    border-right: 10px solid #3d7594;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.face-lists>.item>.translation-text{
+    min-width: 30px;
+    color: #000;
+}
+#langsControlPanel {
+    position: absolute;
+    z-index: 9999;
+    height: 300px;
+    width: 900px;
+    background: khaki;
+}
 /* common */
 h4 {
     line-height: 1.5em;
@@ -274,21 +304,22 @@ h5 {
     font-style: italic;
 }
 em {
+    color: #758a96;
     line-height: 1.5em;
     padding: 4px 6px;
     margin: 0;
     font-weight: normal;
     font-size: 14px;
     box-sizing: border-box;
-    color: #758a96;
     word-break: break-word;
 }
 p {
+    color: #000;
     padding:0 90px 0 40px;
     margin: 0;
     font-size: 14px;
     word-break: break-word;
-    color: #000;
+    display: inline-block;
 }
 q {
     color: #758a96;
@@ -298,6 +329,17 @@ q {
     word-break: break-word;
     display: inline-block;
 }
+ul {
+    color: #788888;
+    margin: 0;
+    font: 13px normal;
+    /* TODO. warning */
+    /*max-height: 15px;*/
+    padding-left: 4em;
+}
+ul span{
+    color: #000000;
+}
 .lp-24px {
     font-size: 24px!important;
 }
@@ -305,10 +347,11 @@ q {
     color: #123f58;
 }
 .focus {
-    outline: rgba(18, 63, 88, 1) auto 5px !important;
+    outline: rgba(18, 63, 88, 1) auto 2px !important;
 }
 .outline-none {
     outline: none;
+    -moz-outline: none;
 }
 .lp-cursor {
     cursor: pointer;
@@ -317,6 +360,15 @@ q {
     display: -webkit-flex; /* Safari */
     display: flex;
     position: relative;
+}
+.lp-flex-column {
+    flex-direction: column;
+}
+.lp-flex-column-reverse {
+    flex-direction: column-reverse;
+}
+.lp-flex-wrap {
+    flex-wrap: wrap;
 }
 .lp-flex-left {
     justify-content: flex-start;
