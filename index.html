@@ -133,7 +133,7 @@
                             </div>
                         </div>
                     <div id="srcTranslation"  class="lp-flex lp-flex-column half-division lang-right">
-                        <h4><span>day</span>的翻译</h4>
+                        <!--<h4><span>day</span>的翻译</h4>
                         <em>名词</em>
                         <div class="face-lists">
                                 <table>
@@ -153,7 +153,7 @@
                                         <td>secret, covert, clandestine, undisclosed, furtive, cloak-and-dagger,dagger</td>
                                     </tr>
                                 </table>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="srcLangsControlPanel" id="srcLangsControlPanel">
                     </div>
@@ -228,6 +228,7 @@
             LANG_EXAMPLE : "#example",
             LANG_SEEALSO : "#seeAlso",
             LANG_SYNONYMS : "#synonyms",
+            LANG_SRCTRANSLATION : "#srcTranslation",
             // Event name
             CLICK : "click",
             FOCUS : "focus",
@@ -260,6 +261,7 @@
             $example : $(Enum.LANG_EXAMPLE),
             $seeAlso : $(Enum.LANG_SEEALSO),
             $synonyms : $(Enum.LANG_SYNONYMS),
+            $srcTranslation : $(Enum.LANG_SRCTRANSLATION),
         };
         // Record
             lpModule.record = {
@@ -475,9 +477,37 @@
                     lpModule.$window.$srcTranslit.text(res[0][1]&&res[0][1][3] || "");
                     lpModule.$window.$destTranslit.text(res[0][1]&&res[0][1][2] || "");
                     let _tmpHTML = "";
+                    let tmp = "";
+                    let temp = "";
+
                     //     0: 'translation',
                     //     1: 'all-translations', confidence
-
+                    res[1] &&
+                        lpModule.$window.$srcTranslation.html(
+                            (function(){
+                                _tmpHTML = `<h4><span><b>${res[0][0][1]}</b></span>的翻译</h4>`;
+                                for(let i = 0, res1 = res[1].length; i < res1; i++){
+                                    _tmpHTML += `<em>${res[1][i][0]}</em>`;
+                                    _tmpHTML += `<div class="face-lists">
+                                                        <table>
+                                                            <tr>
+                                                                <th>置信度</th>
+                                                                <th>译文</th>
+                                                                <th>解释</th>
+                                                            </tr>`;
+                                    for(let p = 0, res1_ = res[1][i][2].length; p < res1_; p++){
+                                        _tmpHTML +=
+                                                    `<tr>
+                                                    <td>${res[1][i][2][p][3]}</td>
+                                                    <td>${res[1][i][2][p][0]}</td>
+                                                    <td>${res[1][i][2][p][1].toString()}</td>
+                                                    </tr>`;
+                                    }
+                                    _tmpHTML += `</table></div>`;
+                                }
+                                return (_tmpHTML);
+                            })()
+                        ) || lpModule.$window.$srcTranslation.html("");
                     //     2: 'original-language',
                     //     5: 'possible-translations',
                     //     6: 'confidence',
@@ -488,14 +518,14 @@
                         lpModule.$window.$synonyms.html(
                             (function(){
                                 _tmpHTML = `<h4>同义词</h4>`;
-                                for(let i = 0, res11 = res[11][0].length; i < res11; i++){
-                                    _tmpHTML +=
-                                        `<h5>${res[11][i][0]}</h5><ul>
-                                        <li><span>${res[11][i][1][i].toString()}</span></li>`;
-
+                                for(let p = 0, res11_ = res[11].length; p < res11_; p++){
+                                    _tmpHTML += `<h5>${res[11][p][0]}</h5>`;
+                                    for(let i = 0, res11 = res[11][p][1].length; i < res11; i++){
+                                        _tmpHTML +=
+                                            `<ul><li><span>${res[11][p][1][i][0].toString()}</span></li></ul>`;
+                                    }
                                 }
-                                console.info("synonyms",_tmpHTML);
-                                return (`${_tmpHTML}</ul>`);
+                                return (`${_tmpHTML}`);
                             })()
                         ) || lpModule.$window.$synonyms.html("");
                     //     12: 'definitions',
@@ -503,14 +533,56 @@
                         lpModule.$window.$srcDefine.html(
                             (function(){
                                 _tmpHTML = `<h4><b>${res[0][0][1]}</b>${res[12][0][0] && "的定义"}</h4>`;
-                                for(let i = 0,res12 = res[12].length; i < res12; i++){
-                                    _tmpHTML +=
-                                    `<h5>${res[12][i][0]}</h5>` +
-                                    `<div class="srcDefineDivision">
-                                        <p>${res[12][i][i]}</p>
-                                        <q>${res[12][i][2]}</q>
-                                        <em class="Synonyms">${res[11] && res[11][0][0] === res[12][i] && res[11][0][1][0] && "同义词:"}<span>${res[11] && res[11][0][0] === res[12][i] && res[11][0][1][0] && res[11][0][1][0][0].toString()}</span></em>
-                                    </div>`;
+                                for(let p = 0, res12_ = res[12].length; p < res12_ ; p++){
+                                    _tmpHTML += `<h5>${res[12][p][0]}</h5>`;
+                                    for(let i = 0,res12 = res[12][p][1].length; i < res12; i++){
+                                        // 这种值用于匹配 m_en_us1242934.001
+                                        // 表示一定量的机器算法上的匹配，这里我们不设置了 可以使用爱来测试
+                                        /*tmp = function(){
+                                            for(let p = 0, res12_ = res[12].length; p < res12_ ; p++){
+
+                                                for(let i = 0,res12 = res[12][p][1].length; i < res12; i++){
+
+                                            for(let q = 0, res11 = res[11].length; q < res11 ; q++){
+                                                if(res[12][p][0] === res[11][q][0] ){
+                                                    for(let x = 0, res11_ = res[11][q][1].length; x < res11_; x++){
+                                                        if(res[12][p][1][i][1] === res[11][q][1][x][1]){
+                                                            temp += res[11][q][1][x][1] + ",";
+                                                        }
+                                                    }
+                                                }
+                                                }
+                                            }
+                                            }
+                                            return temp;
+                                        };
+                                        console.info(tmp().includes(res[12][p][1][i][1]));
+                                        */
+                                        _tmpHTML += `<div class="srcDefineDivision">`;
+                                        _tmpHTML += `
+                                            <p>${res[12][p][1][i][0] || ""}</p>
+                                            ${res[12][p][1][i][2] && "<q>" + res[12][p][1][i][2] + "</q>" || ""}
+                                            <em class="Synonyms">`;
+
+                                        for(let q = 0, res11 = res[11].length; q < res11 ; q++){
+                                            if(res[12][p][0] === res[11][q][0] ){
+                                                for(let x = 0, res11_ = res[11][q][1].length; x < res11_; x++){
+                                                    if(res[12][p][1][i][1] === res[11][q][1][x][1]){
+                                                        console.log(res[11][q][1][x][1]);
+
+                                                        _tmpHTML +=
+                                                            `同义词:        <span>
+                                                                            ${res[11][q][1][x][0].toString()}
+                                                                           </span>
+                                                                `;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                            _tmpHTML += `</em>
+                                                            </div>`
+
+                                    }
                                 }
                                 return _tmpHTML;
                             })()
@@ -531,7 +603,7 @@
                     res[14] &&
                         lpModule.$window.$seeAlso.html(
                             (function(){
-                                return (`<h4>"另请参阅"</h4><p>${res[14][0].toString()}</p>`);
+                                return (`<h4>也可以看看</h4><p>${res[14][0].toString()}</p>`);
                             })()
                         ) || lpModule.$window.$seeAlso.html("");
                 },

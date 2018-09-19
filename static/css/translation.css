@@ -260,6 +260,9 @@ em.Synonyms>span{
 .srcDefineDivision,.exampleDivision li {
     margin-bottom: 10px;
 }
+.srcDefineDivision> p{
+    min-width: 80%;
+}
 .face-lists {
     padding: 4px 20px;
     margin: 0;
@@ -269,14 +272,15 @@ em.Synonyms>span{
 }
 .face-lists table tr th{
     text-align: left;
+    min-width: 50px;
 }
 .face-lists table tr td:nth-child(1){
-    text-align: center;
+    text-align: left;
     border-right: 8px solid #efefef;
 }
 .face-lists table tr td:nth-child(2){
-    text-align: center;
-    border-right: 8px solid #efefef;
+    text-align: left;
+    border-right: 8px solid rgba(239, 239, 239, 0);
 }
 .face-lists table tr td:nth-child(3){
     text-align: left;
@@ -374,6 +378,8 @@ ul {
 }
 ul span{
     color: #000000;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 .lp-24px {
     font-size: 24px!important;
