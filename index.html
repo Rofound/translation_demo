@@ -188,6 +188,10 @@
             LANG_INPUT_TEXTAREA : "#translationInput",
             LANG_OUTPUT_TEXTAREA : "#translationOutput",
             LANG_OUTPUT_COPY_TO_CLIPBOARD : "#translationOutputCopyToClipboard",
+            LANG_INPUT_CHOOICE_PANEL : "#srcLangsControlPanel",
+            LANG_OUTPUT_CHOOICE_PANEL : "#destLangsControlPanel",
+            LANGS : "#langs",
+            LANG_left : "#lang-left",
             // Event name
             CLICK : "click",
             FOCUS : "focus",
@@ -196,17 +200,22 @@
             MOUSEOUT : "mouseout",
             SCCUESS : "success",
             ERROR : "error",
+            RESIZE : "resize",
         };
         // Dom object tree cache
         lpModule.$window = {
             $ : $(window),
             $document : $(document),
             $body : $(document.body),
-            $langs : $("#langs"),
-            $langLeft : $("#lang-left"),
+            $langs : $(Enum.LANGS),
+            $langLeft : $(Enum.LANG_left),
             $langIOLeft : $(Enum.LANG_OF_SOURCE_DIV_SELECTOR),
             $langInput: $(Enum.LANG_INPUT_TEXTAREA),
             $langOutput: $(Enum.LANG_OUTPUT_TEXTAREA),
+            $srcSelect: $(Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR),
+            $destSelect: $(Enum.LANG_OF_DESTINATION_SELECT_SELECTOR),
+            $srcSelectPanel: $(Enum.LANG_INPUT_CHOOICE_PANEL),
+            $destSelectPanel: $(Enum.LANG_OUTPUT_CHOOICE_PANEL),
         };
         // Record
         const record = {
@@ -228,34 +237,52 @@
             });
         };
         lpModule.Clipboard(Enum.LANG_OUTPUT_COPY_TO_CLIPBOARD, lpModule.$window.$langOutput.val());
+        // Position original destination select
+        lpModule.positionLangChooicePanel = function(src, dest){
+              src.offset({top: dest.offset().top + dest.outerHeight(), left: dest.offset().left});
+        };
+        lpModule.positionLangChooicePanel(lpModule.$window.$srcSelectPanel, lpModule.$window.$srcSelect);
+        // Resize
+        lpModule.$window.$.resize(function(){
+            lpModule.positionLangChooicePanel(lpModule.$window.$srcSelectPanel, lpModule.$window.$srcSelect)
+        });
+        lpModule.$window.$srcSelect.bind("offsetHeight", function(e){
+            console.log($(e).offset())
+        });
         for(let i = 0,
                 eventMaps = [
-                    { selectorName: Enum.LANG_BTN_LEFT_SELECTOR, eventName: Enum.CLICK},
-                    { selectorName: Enum.LANG_BTN_RIGHT_SELECTOR, eventName: Enum.CLICK},
-                    { selectorName: Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR, eventName: Enum.CLICK},
-                    { selectorName: Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR, eventName: Enum.BLUR},
-                    { selectorName: Enum.LANG_OF_DESTINATION_SELECT_SELECTOR, eventName: Enum.CLICK},
-                    { selectorName: Enum.LANG_OF_DESTINATION_SELECT_SELECTOR, eventName: Enum.BLUR},
-                    { selectorName: Enum.LANG_INPUT_CLEAR, eventName: Enum.CLICK},
+                    { selectorName: Enum.LANG_BTN_LEFT_SELECTOR, eventName: Enum.CLICK },
+                    { selectorName: Enum.LANG_BTN_RIGHT_SELECTOR, eventName: Enum.CLICK },
 
-                    { selectorName: Enum.LANG_OUTPUT_COPY_TO_CLIPBOARD, eventName: Enum.CLICK},
+                    { selectorName: Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR, eventName: Enum.CLICK },
+                    { selectorName: Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR, eventName: Enum.BLUR },
 
-                    { selectorName: Enum.LANG_INPUT_TEXTAREA, eventName: Enum.CLICK},
-                    { selectorName: Enum.LANG_INPUT_TEXTAREA, eventName: Enum.MOUSEOVER},
+                    { selectorName: Enum.LANG_OF_DESTINATION_SELECT_SELECTOR, eventName: Enum.CLICK },
+                    { selectorName: Enum.LANG_OF_DESTINATION_SELECT_SELECTOR, eventName: Enum.BLUR },
+
+                    { selectorName: Enum.LANG_INPUT_CLEAR, eventName: Enum.CLICK },
+
+                    { selectorName: Enum.LANG_OUTPUT_COPY_TO_CLIPBOARD, eventName: Enum.CLICK },
+
+                    { selectorName: Enum.LANG_INPUT_TEXTAREA, eventName: Enum.CLICK },
+                    { selectorName: Enum.LANG_INPUT_TEXTAREA, eventName: Enum.MOUSEOVER },
                     // source division event start
-                    { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.BLUR},
-                    { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.FOCUS},
+                    { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.BLUR },
+                    { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.FOCUS },
                     // source division event end
 
+
                 ],
-                toggleBtnFn = function(e, a, b){
+                toggleBtnFn = function(e, a, b, fa, fb){
                     if(e.hasClass(a)) {
                         e.addClass(b)
                             .removeClass(a);
+                        $.isFunction(fa) && fa();
                     }
                     else {
                         e.removeClass(b)
                             .addClass(a);
+                        $.isFunction(fb) && fb();
                     }
                 },
                 length = eventMaps.length; i < length; i++)
@@ -290,10 +317,19 @@
                             }
                             break;
                         case Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR:
+                            let blur = function(){
+
+                            };
                             // Toggle
-                            toggleBtnFn($this, Enum.LANG_SELECT_BTN_NOFOCUS, Enum.LANG_SELECT_BTN_CHECKED);
+                            toggleBtnFn(
+                                $this, Enum.LANG_SELECT_BTN_NOFOCUS, Enum.LANG_SELECT_BTN_CHECKED,
+                                function(){
+
+                                },
+                            );
                             if(eventMaps[p].eventName === Enum.BLUR){
                                 $this.removeClass(Enum.LANG_SELECT_BTN_CHECKED).addClass(Enum.LANG_SELECT_BTN_NOFOCUS);
+                                blur();
                             }
                             console.info($this);
                             break;
