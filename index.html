@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>德拓翻译</title>
     <link rel="stylesheet" href="./static/css/translation.css">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <link href="./static/js/libs/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
     <header class="max-width">
@@ -15,7 +16,7 @@
         </div>
     </header>
     <div class="content max-width">
-        <div class="inner">
+        <div class="inner" >
             <div class="title lp-cursor" id="title"><span tabindex="0">翻译</span></div>
             <div class="hr max-width min-width"></div>
             <div class="main">
@@ -23,15 +24,15 @@
                     <div class="langs max-width lp-flex min-width" id="langs">
                         <!-- Original language -->
                         <div class="half-division lang-left lp-flex lp-flex-right " id="lang-left" tabindex="0">
-                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-checked lp-radius-collapse-left lp-clear-right-border lang-btn-group-right-border" tabindex="0" style="-moz-user-select: none;">葡萄牙语</div>
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-checked lp-radius-collapse-left lp-clear-right-border lang-btn-group-right-border" tabindex="0" id="test1">英语</div>
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">中文</div>
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">德语</div>
-                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lang-btn-group-right-border lp-clear-right-border" tabindex="0">检测语言</div>
-                            <div class="original lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse-right standard-select-btn-nofocus" tabindex="0">
+                            <div id="checkLanguage" class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lang-btn-group-right-border lp-clear-right-border" tabindex="0">检测语言</div>
+                            <div id="srcSelect" class="original lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse-right standard-select-btn-nofocus" tabindex="0">
                                 <div class="arrow-dropdown"></div>
                             </div>
-                            <div style="" class="lang-switch lp-flex-inline lp-flex-right outline-none" tabindex="0">
-                                <div class="switch lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse standard-select-btn-nofocus" tabindex="0">
+                            <div class="lang-switch lp-flex-inline lp-flex-right outline-none" tabindex="0">
+                                <div id="exchangeLanguage" class="switch lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse standard-select-btn-nofocus" tabindex="0">
                                     <!--<img src="./static/img/switch_camera.svg" alt="<=>" title="转换">-->
                                     <span class="fa fa-exchange lp-24px lp-color-theme"></span>
                                 </div>
@@ -40,14 +41,13 @@
                         <!-- Destination language -->
                         <div class="half-division lang-right lp-flex lp-flex-left" id="lang-right">
                             <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-checked lp-radius-collapse-left lp-clear-right-border lang-btn-group-right-border" tabindex="0">中文</div>
-                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">葡萄牙语</div>
-                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">葡萄牙语</div>
-                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lang-btn-group-right-border lp-clear-right-border" tabindex="0">德语</div>
-                            <div class="destination lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse-right standard-select-btn-nofocus" tabindex="0">
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">英语</div>
+                            <div class="lang-btn lp-inline-block lp-flex lp-flex-center standard-btn standard-btn-nofocus lp-clear-right-border lang-btn-group-right-border" tabindex="0">德语</div>
+                            <div id="destSelect" class="destination lang-select-btn lang-btn lp-flex lp-flex-center standard-btn lp-radius-collapse-right standard-select-btn-nofocus" tabindex="0">
                                 <div class="arrow-dropdown"></div>
                             </div>
                             <div class="lang-translation lp-flex-inline ">
-                                <div class="lang-select-btn lang-btn lp-flex lp-flex-center lp-radius-collapse standard-select-btn-nofocus" tabindex="0">
+                                <div id="translation" class="lang-select-btn lang-btn lp-flex lp-flex-center lp-radius-collapse standard-select-btn-nofocus" tabindex="0">
                                     翻译
                                 </div>
                             </div>
@@ -69,36 +69,37 @@
                             </div>
                         </div>
                     </div>
-                    <div id="translitDivision" class="lp-flex min-width">
-                        <div id="srcTranslit"  class="half-division src-translit-wrap lp-flex lp-flex-left">
-                            translit```
+                    <div id="translitDivision" class="lp-flex min-width" >
+                        <div id="srcTranslit"  class="half-division src-translit-wrap lp-flex lp-flex-left" v-text="srcTranslit">
+
                         </div>
-                        <div id="destTranslit"  class="half-division dest-translit-wrap lp-flex lp-flex-left lang-right">
-                            translit```
+                        <div id="destTranslit"  class="half-division dest-translit-wrap lp-flex lp-flex-left lang-right" v-text="destTranslit">
+
                         </div>
                     </div>
                     <div id="translationsDisvision" class="lp-flex min-width">
                         <div class="lp-flex lp-flex-column half-division defindeDivision">
                             <div id="srcDefine">
-                                <h4><span>day</span>的定义</h4>
+                                <!--<h4><span>day</span>的定义</h4>
                                 <h5>名词</h5>
                                 <div class="srcDefineDivision">
                                     <p>a period of twenty-four hours as a unit of time, reckoned from one midnight to the next, corresponding to a rotation of the earth on its axis.</p>
                                     <q>There ought to be twenty-nine days in every month, not just leap year Februaries.</q>
-                                    <em class="Synonyms">同义词: <span>a twenty-four-hour period, twenty-four hours</span></em>
+                                    <em class="Synonyms">同义词: <span>a twenty-four-hour period, twenty-four hoursa twenty-four-hour period, twenty-four hours</span></em>
                                 </div>
+                                <h5>名词</h5>
                                 <div class="srcDefineDivision">
                                     <p>a period of twenty-four hours as a unit of time, reckoned from one midnight to the next, corresponding to a rotation of the earth on its axis.</p>
                                     <q>There ought to be twenty-nine days in every month, not just leap year Februaries.</q>
-                                    <em class="Synonyms">同义词: <span>a twenty-four-hour period, twenty-four hours</span></em>
-                                </div>
+                                    <em class="Synonyms">同义词: <span>a twenty-four-hour period, twenty-four hoursa twenty-four-hour period, twenty-four hours</span></em>
+                                </div>-->
                             </div>
-                            <div class="SynonymsDivision">
-                                <h4>同义词</h4>
+                            <div id="synonyms" class="SynonymsDivision">
+                                <!--<h4>同义词</h4>
                                 <h5>名词</h5>
                                 <ul>
                                     <li><span>confidential, top secret, classified, undisclosed, unknown, private, under wraps, hush-hush, sub rosa</span></li>
-                                    <li>hidden, concealed, disguised, invisible</li>
+                                    <li><span>hidden, concealed, disguised, invisible</span></li>
                                     <li>clandestine, covert, undercover, underground, surreptitious, stealthy, furtive, cloak-and-dagger, hole-and-corner, closet, hush-hush
                                     </li>
                                     <li>cryptic, encoded, coded, mysterious, abstruse, recondite, arcane, esoteric, Kabbalistic
@@ -108,11 +109,10 @@
                                     <li>private</li>
                                     <li>secluded, privy
                                     </li>
-                                </ul>
+                                </ul>-->
                             </div>
-                            <div class="exampleDivision">
-                                <h4>示例</h4>
-                                <h5></h5>
+                            <div id="example" class="exampleDivision">
+                                <!--<h4>示例</h4>
                                 <ol>
                                     <li><span>Maybe this strange talisman contained his secret to the mysteries of life.</span></li>
                                     <li>hidden, concealed, disguised, invisible</li>
@@ -125,27 +125,41 @@
                                     <li>private</li>
                                     <li>secluded, privy
                                     </li>
-                                </ol>
+                                </ol>-->
                             </div>
-                            <div class="seemoreDivision">
-                                <h4>另请参阅</h4>
-                                <p>top secret, secret admirer, secret agent, secret love, trade secret, keep a secret, keep secret, secret code, in secret, secret service</p>
+                            <div id="seeAlso" class="seemoreDivision">
+                                <!--<h4>另请参阅</h4>
+                                <p>top secret, secret admirer, secret agent, secret love, trade secret, keep a secret, keep secret, secret code, in secret, secret service</p>-->
                             </div>
                         </div>
-                        <div id="srcTranslation"  class="lp-flex lp-flex-column half-division lang-right">
-                            <h4><span>day</span>的翻译</h4>
-                            <em>名词</em>
-                            <div class="face-lists">
-                                <div class="item">
-                                    <div class="colorbar lp-inline-block"></div>
-                                    <div class="translation-text lp-inline-block">dest-text</div>
-                                    <div class="src-translations lp-inline-block">src-texts</div>
-                                </div>
-                            </div>
+                    <div id="srcTranslation"  class="lp-flex lp-flex-column half-division lang-right">
+                        <h4><span>day</span>的翻译</h4>
+                        <em>名词</em>
+                        <div class="face-lists">
+                                <table>
+                                    <tr>
+                                        <th>置信度</th>
+                                        <th>译文</th>
+                                        <th>解释</th>
+                                    </tr>
+                                    <tr>
+                                        <td>0.43009463</td>
+                                        <td>daggerdagger</td>
+                                        <td>secret, covert, clandestine, undisclosed, furtive, cloak-and-dagger,dagger</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0.43009463</td>
+                                        <td>daggerdagger</td>
+                                        <td>secret, covert, clandestine, undisclosed, furtive, cloak-and-dagger,dagger</td>
+                                    </tr>
+                                </table>
                         </div>
                     </div>
-                    <div id="srcLangsControlPanel">srcLangsControlPanel</div>
-                    <div id="destLangsControlPanel">destLangsControlPanel</div>
+                    <div class="srcLangsControlPanel" id="srcLangsControlPanel">
+                    </div>
+                    </div>
+                    <div class="destLangsControlPanel" id="destLangsControlPanel">
+                    </div>
                     <!--
                     TODO.
                     <div class="history-wrap lp-flex">
@@ -157,18 +171,29 @@
         </div>
     </div>
     <!-- TODO. -->
-    <div style="margin: 800px 0 0 0;"></div>
+    <div style="margin: 34px 0 0 0;"></div>
     <footer class="max-width">
         <div class="inner">
             2018- © <a href="http://www.datatom.com/" title="datatom" target="_blank">Datatom</a> Corp.
         </div>
     </footer>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>-->
+
+    <script src="./static/js/libs/jquery/jquery.min.js"></script>
+    <script src="./static/js/libs/Clipboard/clipboard.min.js"></script>
     <script src="./static/js/polyfill/MDN.js"></script>
     <script>
         // Only one variable
         let lpModule = {};
+        lpModule.url = "http://116.196.115.98:10020/translate/t";
+        // lpModule.url = "http://116.196.115.98:10022/t";
+        lpModule.method = "get";
+        lpModule.argsObject = {
+            word: "",
+            dest: "",
+            src: "",
+        };
         // Enum
         const Enum = {
             // Save some different selector name, but it is, too.
@@ -181,8 +206,8 @@
             // Selector name
             LANG_BTN_RIGHT_SELECTOR : "div.lang-right div",
             LANG_BTN_LEFT_SELECTOR : "div.lang-left div",
-            LANG_OF_ORIGINAL_SELECT_SELECTOR : ".original.lang-select-btn",
-            LANG_OF_DESTINATION_SELECT_SELECTOR : ".destination.lang-select-btn",
+            LANG_OF_ORIGINAL_SELECT_SELECTOR : "#srcSelect",
+            LANG_OF_DESTINATION_SELECT_SELECTOR : "#destSelect",
             LANG_OF_SOURCE_DIV_SELECTOR : "#langIO>.lang-left.lp-flex",
             LANG_INPUT_CLEAR : "#translationInputClear",
             LANG_INPUT_TEXTAREA : "#translationInput",
@@ -190,8 +215,19 @@
             LANG_OUTPUT_COPY_TO_CLIPBOARD : "#translationOutputCopyToClipboard",
             LANG_INPUT_CHOOICE_PANEL : "#srcLangsControlPanel",
             LANG_OUTPUT_CHOOICE_PANEL : "#destLangsControlPanel",
+            LANG_SRC_LANG_CHOOICE : ".lang-left :first",
+            LANG_DEST_LANG_CHOOICE : ".lang-right :first",
             LANGS : "#langs",
             LANG_left : "#lang-left",
+            LANG_TRANSLATION : "#translation",
+            LANG_CHECK : "#checkLanguage",
+            LANG_EXCHANGE : "#exchangeLanguage",
+            LANG_SRCTRANSLIT : "#srcTranslit",
+            LANG_DESTTRANSLIT : "#destTranslit",
+            LANG_SRCDEFINE : "#srcDefine",
+            LANG_EXAMPLE : "#example",
+            LANG_SEEALSO : "#seeAlso",
+            LANG_SYNONYMS : "#synonyms",
             // Event name
             CLICK : "click",
             FOCUS : "focus",
@@ -200,7 +236,6 @@
             MOUSEOUT : "mouseout",
             SCCUESS : "success",
             ERROR : "error",
-            RESIZE : "resize",
         };
         // Dom object tree cache
         lpModule.$window = {
@@ -216,11 +251,20 @@
             $destSelect: $(Enum.LANG_OF_DESTINATION_SELECT_SELECTOR),
             $srcSelectPanel: $(Enum.LANG_INPUT_CHOOICE_PANEL),
             $destSelectPanel: $(Enum.LANG_OUTPUT_CHOOICE_PANEL),
+            $translation : $(Enum.LANG_TRANSLATION),
+            $checkLanguage : $(Enum.LANG_CHECK),
+            $exchangeLanguage : $(Enum.LANG_EXCHANGE),
+            $srcTranslit : $(Enum.LANG_SRCTRANSLIT),
+            $destTranslit : $(Enum.LANG_DESTTRANSLIT),
+            $srcDefine : $(Enum.LANG_SRCDEFINE),
+            $example : $(Enum.LANG_EXAMPLE),
+            $seeAlso : $(Enum.LANG_SEEALSO),
+            $synonyms : $(Enum.LANG_SYNONYMS),
         };
         // Record
-        const record = {
-            langBtnLeftChooice : ".lang-left :first",
-            langBtnRightChooice : ".lang-right :first",
+            lpModule.record = {
+            langBtnLeftChooice : $(Enum.LANG_SRC_LANG_CHOOICE),
+            langBtnRightChooice : $(Enum.LANG_DEST_LANG_CHOOICE),
         };
         // Copy to the clipboard
         lpModule.Clipboard = function(selectorName, originalContent){
@@ -238,17 +282,306 @@
         };
         lpModule.Clipboard(Enum.LANG_OUTPUT_COPY_TO_CLIPBOARD, lpModule.$window.$langOutput.val());
         // Position original destination select
-        lpModule.positionLangChooicePanel = function(src, dest){
-              src.offset({top: dest.offset().top + dest.outerHeight(), left: dest.offset().left});
+        lpModule.positionSrcLangChooicePanel = function(src, dest){
+            src.offset({top: dest.offset().top + dest.outerHeight(), left: dest.offset().left});
         };
-        lpModule.positionLangChooicePanel(lpModule.$window.$srcSelectPanel, lpModule.$window.$srcSelect);
+        lpModule.positionDestLangChooicePanel = function(src, dest){
+            src.offset({top: dest.offset().top + dest.outerHeight(), left: dest.offset().left - src.outerWidth() + dest.outerWidth()});
+        };
         // Resize
         lpModule.$window.$.resize(function(){
-            lpModule.positionLangChooicePanel(lpModule.$window.$srcSelectPanel, lpModule.$window.$srcSelect)
+            lpModule.positionSrcLangChooicePanel(lpModule.$window.$srcSelectPanel, lpModule.$window.$srcSelect);
+            lpModule.positionDestLangChooicePanel(lpModule.$window.$destSelectPanel, lpModule.$window.$destSelect);
         });
-        lpModule.$window.$srcSelect.bind("offsetHeight", function(e){
-            console.log($(e).offset())
-        });
+        // Select
+        lpModule.LANGUAGES = {
+            'af': 'afrikaans',
+            'sq': 'albanian',
+            'am': 'amharic',
+            'ar': 'arabic',
+            'hy': 'armenian',
+            'az': 'azerbaijani',
+            'eu': 'basque',
+            'be': 'belarusian',
+            'bn': 'bengali',
+            'bs': 'bosnian',
+            'bg': 'bulgarian',
+            'ca': 'catalan',
+            'ceb': 'cebuano',
+            'ny': 'chichewa',
+            'zh-cn': 'chinese (simplified)',
+            'zh-tw': 'chinese (traditional)',
+            'co': 'corsican',
+            'hr': 'croatian',
+            'cs': 'czech',
+            'da': 'danish',
+            'nl': 'dutch',
+            'en': 'english',
+            'eo': 'esperanto',
+            'et': 'estonian',
+            'tl': 'filipino',
+            'fi': 'finnish',
+            'fr': 'french',
+            'fy': 'frisian',
+            'gl': 'galician',
+            'ka': 'georgian',
+            'de': 'german',
+            'el': 'greek',
+            'gu': 'gujarati',
+            'ht': 'haitian creole',
+            'ha': 'hausa',
+            'haw': 'hawaiian',
+            'iw': 'hebrew',
+            'hi': 'hindi',
+            'hmn': 'hmong',
+            'hu': 'hungarian',
+            'is': 'icelandic',
+            'ig': 'igbo',
+            'id': 'indonesian',
+            'ga': 'irish',
+            'it': 'italian',
+            'ja': 'japanese',
+            'jw': 'javanese',
+            'kn': 'kannada',
+            'kk': 'kazakh',
+            'km': 'khmer',
+            'ko': 'korean',
+            'ku': 'kurdish (kurmanji)',
+            'ky': 'kyrgyz',
+            'lo': 'lao',
+            'la': 'latin',
+            'lv': 'latvian',
+            'lt': 'lithuanian',
+            'lb': 'luxembourgish',
+            'mk': 'macedonian',
+            'mg': 'malagasy',
+            'ms': 'malay',
+            'ml': 'malayalam',
+            'mt': 'maltese',
+            'mi': 'maori',
+            'mr': 'marathi',
+            'mn': 'mongolian',
+            'my': 'myanmar (burmese)',
+            'ne': 'nepali',
+            'no': 'norwegian',
+            'ps': 'pashto',
+            'fa': 'persian',
+            'pl': 'polish',
+            'pt': 'portuguese',
+            'pa': 'punjabi',
+            'ro': 'romanian',
+            'ru': 'russian',
+            'sm': 'samoan',
+            'gd': 'scots gaelic',
+            'sr': 'serbian',
+            'st': 'sesotho',
+            'sn': 'shona',
+            'sd': 'sindhi',
+            'si': 'sinhala',
+            'sk': 'slovak',
+            'sl': 'slovenian',
+            'so': 'somali',
+            'es': 'spanish',
+            'su': 'sundanese',
+            'sw': 'swahili',
+            'sv': 'swedish',
+            'tg': 'tajik',
+            'ta': 'tamil',
+            'te': 'telugu',
+        };
+        lpModule.LANGS_MAP1 = {
+             "英语": "en" ,
+             "德语": "de" ,
+             "俄语": "ru" ,
+             "波兰语": "pl" ,
+             "阿拉伯语": "ar" ,
+             "葡萄牙语": "pt" ,
+             "西班牙语": "es" ,
+             "法语": "fr" ,
+             // "南非荷兰语": "af" ,
+             // "阿尔巴尼亚语": "sq",
+             "中文": "zh-cn",
+             // "中文繁体": "zh-tw",
+        };
+        lpModule.LANGS_MAP = [
+            { "英语": "en" },
+            { "德语": "de" },
+            { "俄语": "ru" },
+            { "波兰语": "pl" },
+            { "阿拉伯语": "ar" },
+            { "葡萄牙语": "pt" },
+            { "西班牙语": "es" },
+            { "法语": "fr" },
+            // { "南非荷兰语": "af" },
+            // { "阿尔巴尼亚语": "sq" },
+            {"中文": "zh-CN"},
+            // {"中文繁体": "zh-TW"},
+        ];
+        // Render select
+        // Language List
+        lpModule.languageList = function(fn){
+            let _LANGS_HTML = "";
+            for(let i = 0, c = 1,
+                    returnObjectFirstProperty = function(o){
+                        for(let p in o){
+                            return p;
+                        }
+                    },
+                    LANGS_MAP_LENGTH = lpModule.LANGS_MAP.length; i < LANGS_MAP_LENGTH; i++){
+                _LANGS_HTML += ("<span onclick=\'"+fn+"\'" +">"+returnObjectFirstProperty(lpModule.LANGS_MAP[i])+"</span>");
+            }
+            return _LANGS_HTML;
+        };
+        lpModule.chooiceSrcLang = function(t){
+            // Toggle to light-high text
+            _toggleToLightHight = function(){
+                lpModule.record.langBtnLeftChooice.html($(t).text());
+            };
+            _toggleToLightHight();
+            // Update to not use of Recent time
+        };
+        lpModule.chooiceDestLang = function(t){
+            // Toggle to light-high text
+            _toggleToLightHight = function(){
+                lpModule.record.langBtnRightChooice.html($(t).text());
+            };
+            _toggleToLightHight();
+            // Update to not use of Recent time
+        };
+        lpModule.$window.$srcSelectPanel.html(lpModule.languageList("lpModule.chooiceSrcLang(this)"));
+        lpModule.$window.$destSelectPanel.html(lpModule.languageList("lpModule.chooiceDestLang(this)"));
+        // Do translation
+        lpModule.doTranslation = function(){
+            lpModule.argsObject.dest = "";
+            lpModule.argsObject.word = lpModule.$window.$langInput.val();
+
+            lpModule.argsObject.src = lpModule.LANGS_MAP1[lpModule.record.langBtnLeftChooice.text()];
+            lpModule.argsObject.dest = lpModule.LANGS_MAP1[lpModule.record.langBtnRightChooice.text()];
+
+            console.log("src: \n", lpModule.LANGS_MAP1[lpModule.record.langBtnLeftChooice.text()]);
+            console.log("dest: \n", lpModule.LANGS_MAP1[lpModule.record.langBtnRightChooice.text()]);
+            $.ajax({
+                url: lpModule.url,
+                method: lpModule.method,
+                data: lpModule.argsObject,
+                dataType: "json",
+                cache: false,
+                sync: true,
+                success: function(res){
+                    console.info("res: \n",res);
+                    // Output text area
+                    lpModule.$window.$langOutput.val(res[0][0][0] || "");
+                    // translit
+                    lpModule.$window.$srcTranslit.text(res[0][1]&&res[0][1][3] || "");
+                    lpModule.$window.$destTranslit.text(res[0][1]&&res[0][1][2] || "");
+                    let _tmpHTML = "";
+                    //     0: 'translation',
+                    //     1: 'all-translations', confidence
+
+                    //     2: 'original-language',
+                    //     5: 'possible-translations',
+                    //     6: 'confidence',
+                    //     7: 'possible-mistakes',
+                    //     8: 'language',
+                    //     11: 'synonyms',
+                    res[11] &&
+                        lpModule.$window.$synonyms.html(
+                            (function(){
+                                _tmpHTML = `<h4>同义词</h4>`;
+                                for(let i = 0, res11 = res[11][0].length; i < res11; i++){
+                                    _tmpHTML +=
+                                        `<h5>${res[11][i][0]}</h5><ul>
+                                        <li><span>${res[11][i][1][i].toString()}</span></li>`;
+
+                                }
+                                console.info("synonyms",_tmpHTML);
+                                return (`${_tmpHTML}</ul>`);
+                            })()
+                        ) || lpModule.$window.$synonyms.html("");
+                    //     12: 'definitions',
+                    res[12] &&
+                        lpModule.$window.$srcDefine.html(
+                            (function(){
+                                _tmpHTML = `<h4><b>${res[0][0][1]}</b>${res[12][0][0] && "的定义"}</h4>`;
+                                for(let i = 0,res12 = res[12].length; i < res12; i++){
+                                    _tmpHTML +=
+                                    `<h5>${res[12][i][0]}</h5>` +
+                                    `<div class="srcDefineDivision">
+                                        <p>${res[12][i][i]}</p>
+                                        <q>${res[12][i][2]}</q>
+                                        <em class="Synonyms">${res[11] && res[11][0][0] === res[12][i] && res[11][0][1][0] && "同义词:"}<span>${res[11] && res[11][0][0] === res[12][i] && res[11][0][1][0] && res[11][0][1][0][0].toString()}</span></em>
+                                    </div>`;
+                                }
+                                return _tmpHTML;
+                            })()
+                        ) || lpModule.$window.$srcDefine.html("");
+                    //     13: 'examples',
+                    res[13] &&
+                        lpModule.$window.$example.html(
+                            (function(){
+                                _tmpHTML = `<h4>示例</h4><ol>`;
+                                for(let i = 0, res13 = res[13][0    ].length; i < res13; i++){
+                                       _tmpHTML +=
+                                           `<li><span>${res[13][0][i][0]}</span></li>`;
+                                }
+                                return (`${_tmpHTML}</ol>`);
+                            })()
+                        ) || lpModule.$window.$example.html("");
+                    //     14: 'see-also',
+                    res[14] &&
+                        lpModule.$window.$seeAlso.html(
+                            (function(){
+                                return (`<h4>"另请参阅"</h4><p>${res[14][0].toString()}</p>`);
+                            })()
+                        ) || lpModule.$window.$seeAlso.html("");
+                },
+                error: function(e){
+                    console.log(e);
+                }
+            });
+        };
+        // Do check language
+        lpModule.checkLanguage = function(t){
+            lpModule.argsObject.dest = "";
+            lpModule.argsObject.word = lpModule.$window.$langInput.val();
+            lpModule.argsObject.src = "";
+            lpModule.argsObject.dest = "";
+
+            console.log("src: \n", lpModule.LANGS_MAP1[lpModule.record.langBtnLeftChooice.text()]);
+            console.log("dest: \n", lpModule.LANGS_MAP1[lpModule.record.langBtnRightChooice.text()]);
+            $.ajax({
+                url: lpModule.url,
+                method: lpModule.method,
+                data: lpModule.argsObject,
+                dataType: "json",
+                cache: false,
+                sync: true,
+                success: function(res){
+                    console.info("check res: \n",res);
+                    // check
+                    for(let p in lpModule.LANGS_MAP1){
+                        if(lpModule.LANGS_MAP1[p].toUpperCase() === res[2].toUpperCase()){
+                            t.text("检测到" + p);
+                            console.log(p);
+                        }
+                    }
+                    console.log("check", res[2])
+                },
+                error: function(e){
+                    console.log(e);
+                }
+            });
+        };
+        // Exchange
+        lpModule.exchangeLanguage = function(a, b, c, d){
+            let tmp = "";
+            tmp = a.text();
+            a.text(b.text());
+            b.text(tmp);
+            tmp = c.val();
+            c.val(d.val());
+            d.val(tmp);
+        };
         for(let i = 0,
                 eventMaps = [
                     { selectorName: Enum.LANG_BTN_LEFT_SELECTOR, eventName: Enum.CLICK },
@@ -271,7 +604,11 @@
                     { selectorName: Enum.LANG_OF_SOURCE_DIV_SELECTOR, eventName: Enum.FOCUS },
                     // source division event end
 
+                    { selectorName: Enum.LANG_TRANSLATION, eventName: Enum.CLICK },
 
+                    { selectorName: Enum.LANG_CHECK, eventName: Enum.CLICK },
+
+                    { selectorName: Enum.LANG_EXCHANGE, eventName: Enum.CLICK },
                 ],
                 toggleBtnFn = function(e, a, b, fa, fb){
                     if(e.hasClass(a)) {
@@ -298,11 +635,11 @@
                                 $this.addClass(Enum.LANG_BTN_CHECKED)
                                     .removeClass(Enum.LANG_BTN_NOFOCUS);
 
-                                $(record.langBtnRightChooice)
+                                $(lpModule.record.langBtnRightChooice)
                                     .removeClass(Enum.LANG_BTN_CHECKED)
                                     .addClass(Enum.LANG_BTN_NOFOCUS);
 
-                                record.langBtnRightChooice = $this;
+                                lpModule.record.langBtnRightChooice = $this;
                             }
                             break;
                         case Enum.LANG_BTN_LEFT_SELECTOR:
@@ -310,34 +647,51 @@
                                 $this.addClass(Enum.LANG_BTN_CHECKED)
                                     .removeClass(Enum.LANG_BTN_NOFOCUS);
 
-                                $(record.langBtnLeftChooice).removeClass(Enum.LANG_BTN_CHECKED)
+                                $(lpModule.record.langBtnLeftChooice).removeClass(Enum.LANG_BTN_CHECKED)
                                     .addClass(Enum.LANG_BTN_NOFOCUS);
 
-                                record.langBtnLeftChooice = $this;
+                                lpModule.record.langBtnLeftChooice = $this;
                             }
                             break;
                         case Enum.LANG_OF_ORIGINAL_SELECT_SELECTOR:
-                            let blur = function(){
-
+                            let srcBlur = function(){
+                                setTimeout(function(){
+                                    lpModule.$window.$srcSelectPanel.hide();
+                                },200);
                             };
                             // Toggle
                             toggleBtnFn(
                                 $this, Enum.LANG_SELECT_BTN_NOFOCUS, Enum.LANG_SELECT_BTN_CHECKED,
                                 function(){
-
+                                    lpModule.$window.$srcSelectPanel.show();
+                                    lpModule.positionSrcLangChooicePanel(lpModule.$window.$srcSelectPanel, lpModule.$window.$srcSelect);
                                 },
+                                srcBlur
                             );
                             if(eventMaps[p].eventName === Enum.BLUR){
                                 $this.removeClass(Enum.LANG_SELECT_BTN_CHECKED).addClass(Enum.LANG_SELECT_BTN_NOFOCUS);
-                                blur();
+                                srcBlur();
                             }
                             console.info($this);
                             break;
                         case Enum.LANG_OF_DESTINATION_SELECT_SELECTOR:
+                            let destBlur = function(){
+                                setTimeout(function(){
+                                    lpModule.$window.$destSelectPanel.hide();
+                                },200);
+                            };
                             // Toggle
-                            toggleBtnFn($this, Enum.LANG_SELECT_BTN_NOFOCUS, Enum.LANG_SELECT_BTN_CHECKED);
+                            toggleBtnFn(
+                                $this, Enum.LANG_SELECT_BTN_NOFOCUS, Enum.LANG_SELECT_BTN_CHECKED,
+                                function(){
+                                    lpModule.$window.$destSelectPanel.show();
+                                    lpModule.positionDestLangChooicePanel(lpModule.$window.$destSelectPanel, lpModule.$window.$destSelect);
+                                },
+                                destBlur
+                            );
                             if(eventMaps[p].eventName === Enum.BLUR){
                                 $this.removeClass(Enum.LANG_SELECT_BTN_CHECKED).addClass(Enum.LANG_SELECT_BTN_NOFOCUS);
+                                destBlur();
                             }
                             console.info($this);
                             break;
@@ -360,6 +714,19 @@
                             else if(eventMaps[p].eventName === Enum.MOUSEOVER){
                                 $this.addClass(Enum.LANG_BTN)
                             }
+                            break;
+                        case Enum.LANG_TRANSLATION:
+                            lpModule.doTranslation();
+                            break;
+                        case Enum.LANG_CHECK:
+                            new lpModule.checkLanguage($this);
+                            break;
+                        case Enum.LANG_EXCHANGE:
+                            lpModule.exchangeLanguage(
+                                lpModule.record.langBtnLeftChooice, lpModule.record.langBtnRightChooice,
+                                lpModule.$window.$langInput,
+                                lpModule.$window.$langOutput,
+                            );
                             break;
                     }
                 })
@@ -395,7 +762,7 @@
             // Make textarea auto height
             $("#translationInput").autoHeight();
             $("#translationOutput").autoHeight();
-        })
+        });
     </script>
 </body>
 </html>

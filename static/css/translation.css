@@ -32,7 +32,7 @@ header > .inner .logo {
     height: 30px;
     padding: 10px 0;
 }
-.content .title {
+.content .inner .title {
     padding: 20px 0;
     font-size: 20px;
     animation: titleWelcome 2s;
@@ -249,37 +249,71 @@ header > .inner .logo {
 }
 em.Synonyms{
     padding:0 90px 0 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 115%;
 }
-.srcDefineDivision {
+em.Synonyms>span{
+    font-style: normal;
+}
+.srcDefineDivision,.exampleDivision li {
     margin-bottom: 10px;
 }
 .face-lists {
-    padding: 4px 6px;
+    padding: 4px 20px;
     margin: 0;
     font-weight: normal;
     font-size: 13px;
+    line-height: 13px;
 }
-.face-lists>.item>div{
-    border-right: 20px transparent solid ;
+.face-lists table tr th{
+    text-align: left;
 }
-.face-lists>.item>.colorbar{
-    min-width: 30px;
-    text-align: right;
-    height: 9px;
-    border-right: 10px solid #3d7594;
-    vertical-align: middle;
-    margin-right: 5px;
+.face-lists table tr td:nth-child(1){
+    text-align: center;
+    border-right: 8px solid #efefef;
 }
-.face-lists>.item>.translation-text{
-    min-width: 30px;
-    color: #000;
+.face-lists table tr td:nth-child(2){
+    text-align: center;
+    border-right: 8px solid #efefef;
 }
-#srcLangsControlPanel, #destLangsControlPanel {
+.face-lists table tr td:nth-child(3){
+    text-align: left;
+    border-right: 8px solid #efefef;
+}
+
+.srcLangsControlPanel, .destLangsControlPanel {
     position: absolute;
-    z-index: 9999;
-    height: 300px;
-    width: 600px;
-    background: #a94442;
+    height: 25px;
+    width: 470px;
+    border: 1px solid rgba(18, 63, 88, .4);
+    padding: 8px 0;
+    display: none;
+    z-index: 99999;
+}
+.destLangsControlPanel {
+    background: #ffffff;
+    -webkit-box-shadow: -2px 3px 7px 1px rgba(0,0,0,0.39);
+    -moz-box-shadow: -2px 3px 7px 1px rgba(0,0,0,0.39);
+    box-shadow: -2px 3px 7px 1px rgba(0,0,0,0.39);
+}
+.srcLangsControlPanel {
+    background: #ffffff;
+    -webkit-box-shadow: 2px 3px 7px 1px rgba(0,0,0,0.39);
+    -moz-box-shadow: 2px 3px 7px 1px rgba(0,0,0,0.39);
+    box-shadow: 2px 3px 7px 1px rgba(0,0,0,0.39);
+}
+.srcLangsControlPanel> span, .destLangsControlPanel> span{
+    padding: 3px 8px;
+    margin: 0;
+    font-weight: normal;
+    font-size: 13px;
+    display: inline-block;
+}
+.srcLangsControlPanel> span:hover, .destLangsControlPanel> span:hover{
+    background: rgba(30, 52, 64, 0.1);
+    outline: 1px solid rgba(75, 132, 165, 0.6);
 }
 /* common */
 h4 {
@@ -409,6 +443,10 @@ ul span{
 }
 .half-division {
     width: 49%;
+}
+footer {
+    position: fixed;
+    bottom: 0;
 }
 footer>.inner{
     padding: 10px 0;
